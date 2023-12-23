@@ -6,8 +6,9 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model User {
@@ -17,6 +18,8 @@ model User {
   email     String   @unique
   username  String   @unique
   password  String
+  about     String
+  role      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
