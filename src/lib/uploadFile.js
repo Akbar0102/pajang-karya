@@ -6,6 +6,9 @@ const s3Client = new S3Client({
     accessKeyId: process.env.AWSS3_ACCESS_KEY,
     secretAccessKey: process.env.AWSS3_SECRET_KEY,
   },
+  endpoint: {
+    url: "https://s3.ap-southeast-1.wasabisys.com",
+  }
 });
 
 export async function uploadFile({ Body, Key, ContentType, Dir }) {
