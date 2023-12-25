@@ -18,7 +18,7 @@ export const ProjectCard = ({ id, name, featuredImage, slug, username }) => {
                 <p className=" text-lg font-semibold">{name}</p>
                 <div className=" flex gap-1 items-center">
                     <Avatar name={username} radius="full" />
-                    <small className=" font-normal text-grey text-base">{username}</small>
+                    <p className=" font-normal text-grey text-base">{username}</p>
                 </div>
 
             </CardFooter>
