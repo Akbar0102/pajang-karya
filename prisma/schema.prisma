@@ -12,14 +12,45 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
+  id        String    @id @default(uuid())
   firstName String
   lastName  String
-  email     String   @unique
-  username  String   @unique
+  email     String    @unique
+  username  String    @unique
   password  String
   about     String
   role      String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  projects  Project[]
+  comments  Comment[]
+}
+
+model Project {
+  id            String    @id @default(uuid())
+  name          String
+  slug          String    @unique
+  description   String
+  featuredImage String
+  category      String
+  type          String
+  link          String
+  repository    String
+  tech          String
+  userId        String
+  user          User      @relation(fields: [userId], references: [id])
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  comments      Comment[]
+}
+
+model Comment {
+  id        String   @id @default(uuid())
+  content   String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

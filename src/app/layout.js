@@ -1,8 +1,8 @@
-import { Inter as FontSans } from "next/font/google";
+import { Poppins as FontSans } from "next/font/google";
 import { Provider } from "@/components/provider/index.jsx";
 import "@/styles/globals.css";
 
-const fontSans = FontSans({ subsets: ["latin"] });
+const fontSans = FontSans({ subsets: ["latin"], weight: ["400", "600", "700"] });
 
 export const metadata = {
   title: "Pajang Karya - Hexteam",
