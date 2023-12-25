@@ -31,7 +31,7 @@ npm run dev
 
 ### Functionality
 
-- Create a new branch for each feature
+- Create a new branch for each feature (example: feature/{name})
 - Create a pull request for each feature
 - DO NOT merge your own pull request
 
