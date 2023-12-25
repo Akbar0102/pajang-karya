@@ -48,6 +48,7 @@ export async function POST(req) {
       lastName: findUser.lastName,
       username: findUser.username,
       email: findUser.email,
+      role: findUser.role,
     };
 
     // Buat token
