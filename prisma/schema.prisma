@@ -12,18 +12,21 @@ datasource db {
 }
 
 model User {
-  id        String    @id @default(uuid())
-  firstName String
-  lastName  String
-  email     String    @unique
-  username  String    @unique
-  password  String
-  about     String
-  role      String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  projects  Project[]
-  comments  Comment[]
+  id            String          @id @default(uuid())
+  firstName     String
+  lastName      String
+  email         String          @unique
+  username      String          @unique
+  password      String
+  about         String
+  role          String
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  project       Project[]
+  comment       Comment[]
+  review        Review[]
+  userExpert    UserExpert?
+  userChallenge UserChallenge[]
 }
 
 model Project {
@@ -41,7 +44,8 @@ model Project {
   user          User      @relation(fields: [userId], references: [id])
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
-  comments      Comment[]
+  comment       Comment[]
+  review        Review[]
 }
 
 model Comment {
@@ -53,4 +57,46 @@ model Comment {
   project   Project  @relation(fields: [projectId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Review {
+  id        String   @id @default(uuid())
+  review    String?
+  status    String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model UserExpert {
+  id        String   @id @default(uuid())
+  expertise String
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Challenge {
+  id            String          @id @default(uuid())
+  name          String
+  description   String
+  featuredImage String
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  userChallenge UserChallenge[]
+}
+
+model UserChallenge {
+  id          String    @id @default(uuid())
+  status      String
+  userId      String
+  user        User      @relation(fields: [userId], references: [id])
+  challengeId String
+  challenge   Challenge @relation(fields: [challengeId], references: [id])
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 }
