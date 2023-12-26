@@ -1,5 +1,6 @@
 "use client"
 import { Card, CardBody, Image, CardFooter, user, Avatar } from "@nextui-org/react";
+import { imageUrl } from "@/config/apiUrl";
 
 export const ProjectCard = ({ id, name, featuredImage, slug, username }) => {
 
@@ -9,7 +10,7 @@ export const ProjectCard = ({ id, name, featuredImage, slug, username }) => {
                 <Image
                     alt="Card background"
                     className=" m-0 w-[287px] h-[226px] rounded-3xl"
-                    src={`${featuredImage}`}
+                    src={`${imageUrl}/projects/tr:w-300,h-200,c-at_max/${id}/${featuredImage}`}
                     width={287}
                     height={226}
                 />
