@@ -82,6 +82,11 @@ export async function GET(request) {
             },
           },
         },
+        user: {
+          select: {
+            username: true,
+          },
+        },
       },
     });
     return NextResponse.json({
