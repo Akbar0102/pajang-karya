@@ -1,4 +1,4 @@
-import { AllProducts, AllProjects } from "@/components/projects/allProjects";
+import { AllProjects } from "@/components/projects/allProjects";
 import { apiUrl, imageUrl } from "@/config/apiUrl";
 import { Button, Image } from "@nextui-org/react";
 import Link from "next/link";
