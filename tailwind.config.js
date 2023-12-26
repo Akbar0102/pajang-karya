@@ -15,7 +15,10 @@ module.exports = {
           50: "#232631"
         },
         grey: "#7B7B7B",
-        violet: "#3258E8"
+        violet: {
+          DEFAULT: "#3258E8",
+          light: "rgba(50, 88, 232, 0.10)"
+        }
       }
     }
   },
