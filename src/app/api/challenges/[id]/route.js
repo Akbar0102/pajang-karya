@@ -9,10 +9,29 @@ export async function GET(req, { params }) {
       where: {
         id: id,
       },
+      include: {
+        userChallenge: {
+          select: {
+            status: true,
+            user: {
+              select: {
+                username: true,
+                firstName: true,
+                lastName: true,
+              },
+            },
+          },
+        },
+      },
     });
 
+    const countUser = singleChallenge.userChallenge.length;
+
     return NextResponse.json(
-      { message: "Challenge fetched succesfully!", data: singleChallenge },
+      {
+        message: "Challenge fetched succesfully!",
+        data: { ...singleChallenge, countUser: countUser },
+      },
       { status: 200 }
     );
   } catch (error) {
