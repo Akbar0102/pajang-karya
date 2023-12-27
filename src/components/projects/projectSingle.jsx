@@ -1,25 +1,28 @@
-import { Avatar, Image } from "@nextui-org/react"
+import { Avatar, Image, user } from "@nextui-org/react"
 import { Footer } from "../sharedUI/footer"
 import { Header } from "../sharedUI/header"
 import Link from "next/link"
 import { AllComments } from "../comments/allComments"
 import { CreateComment } from "../comments/createComment"
+import { imageUrl } from "@/config/apiUrl"
 
-export const ProjectSingle = () => {
+export const ProjectSingle = ({ data }) => {
+    const { id, name, user, featuredImage, description, repository, link, tech } = data
+    const { username } = user
     return (
         <>
             <Header />
             <main className=" mx-[100px] mt-[173px]">
                 <section>
-                    <h1 className=" text-[52px] text-black-50 font-[800]">Portfolio assignment</h1>
+                    <h1 className=" text-[52px] text-black-50 font-[800]">{name}</h1>
                     <div className=" flex gap-1 items-center">
-                        <Avatar name={"Munir"} radius="full" />
-                        <p className=" font-normal text-grey text-[32px]">Munir</p>
+                        <Avatar name={username} radius="full" />
+                        <p className=" font-normal text-grey text-[32px]">{username}</p>
                     </div>
                     <Image
-                        className=" bg-sky-700 mt-16 rounded-3xl"
+                        className=" mt-16 rounded-3xl"
                         alt="project-featured-image"
-                        src="/icon/logo.svg"
+                        src={`${imageUrl}/projects/tr:w-300,h-200,c-at_max/${id}/${featuredImage}`}
                         width={287}
                         height={332}
                     />
@@ -29,8 +32,8 @@ export const ProjectSingle = () => {
                     <div className=" grid grid-cols-3">
                         <div className=" col-span-2">
                             <h2 className=" text-black-50 font-semibold text-4xl mb-2">Overview</h2>
-                            <p className=" text-xl font-medium">
-                                Salah satu tugas saat mengikuti bootcamp belajar web programming. Awalnya agak sulit karena belum mengerti pemprograman tapi lama-lama seru juga :D
+                            <p className=" text-xl font-medium pr-4">
+                                {description}
                             </p>
                         </div>
                         <div>
@@ -40,16 +43,16 @@ export const ProjectSingle = () => {
                                     <Image
                                         src="/icon/link.svg"
                                     />
-                                    <a href="github.com/portfolio-assignment" className=" text-xl font-medium hover:text-violet">
-                                        github.com/portfolio-assignment
+                                    <a href={repository} className=" text-xl font-medium hover:text-violet break-all">
+                                        {repository}
                                     </a>
                                 </div>
                                 <div className=" flex gap-1 ml-2">
                                     <Image
                                         src="/icon/link.svg"
                                     />
-                                    <a href="portfoliome.vercel.app" className=" text-xl font-medium hover:text-violet">
-                                        portfoliome.vercel.app
+                                    <a href={link} className=" text-xl font-medium hover:text-violet break-all">
+                                        {link}
                                     </a>
                                 </div>
 
@@ -57,7 +60,7 @@ export const ProjectSingle = () => {
                             </div>
                             <div className=" mt-[109px]">
                                 <h2 className=" text-black-50 font-semibold text-4xl mb-2">Tech stack</h2>
-                                <p className=" text-xl font-medium">Next.js, Vercel</p>
+                                <p className=" text-xl font-medium">{tech}</p>
                             </div>
                         </div>
                     </div>
