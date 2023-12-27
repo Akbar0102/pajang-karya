@@ -18,6 +18,10 @@ module.exports = {
         violet: {
           DEFAULT: "#3258E8",
           light: "rgba(50, 88, 232, 0.10)"
+        },
+        white: {
+          DEFAULT: "#FFFFFF",
+          dark: "#E0E7FA"
         }
       }
     }
