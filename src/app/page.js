@@ -1,4 +1,5 @@
 import { AllProjects } from "@/components/projects/allProjects";
+import { Header } from "@/components/sharedUI/header";
 import { apiUrl, imageUrl } from "@/config/apiUrl";
 import { Button, Image } from "@nextui-org/react";
 import Link from "next/link";
@@ -20,7 +21,8 @@ export default async function Home({ searchParams }) {
   const { data } = await getData(searchParams.q);
   return (
     <main>
-      <section className=" flex flex-col items-center justify-center mt-[208px]">
+      <Header />
+      <section className=" flex flex-col items-center justify-center mt-[130px]">
         <Button radius="full" className=" bg-black-100 px-6 py-4 text-white font-normal text-base">Over 3 million interesting project!</Button>
         <h1 className=" font-bold text-[52px] text-center text-black-50">Join newly developer<br></br>show their project</h1>
         <p className=" text-xl text-grey">Your plain project is also a project</p>
