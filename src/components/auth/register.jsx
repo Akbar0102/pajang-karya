@@ -26,9 +26,12 @@ export const Register = () => {
 
   return (
     <div className="w-[460px] space-y-8">
-      <div>
+      <div className="space-y-2">
         <h3>Register</h3>
-        <p>Please create an account</p>
+        <p className="w-[425px] text-justify">
+          <span className="font-bold tracking-tight mr-1">Pakarya</span>
+          help you to exhibit your learning projects, share your coding triumphs and engage with other newly developer.
+        </p>
       </div>
       <form onSubmit={handleRegister} className="space-y-3">
         <div className="space-y-2">
@@ -48,13 +51,11 @@ export const Register = () => {
             Register
           </Button>
         </div>
-        <div>
-          <p>
-            Already have an accout?{" "}
-            <Link href="/login">
-              <span className="link">Login</span>
-            </Link>
-          </p>
+        <div className="flex space-x-1">
+          <p>Do you have an account?</p>
+          <Link href="/login" className="link">
+            Login
+          </Link>
         </div>
       </form>
     </div>
