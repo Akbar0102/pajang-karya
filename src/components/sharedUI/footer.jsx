@@ -11,7 +11,7 @@ export const Footer = () => {
                     height={26}
                 />
                 <strong className=" text-white text-2xl font-semibold">
-                    Buildletin
+                Pakarya
                 </strong>
             </div>
             <text className=" text-white-dark text-base font-normal text-center">
