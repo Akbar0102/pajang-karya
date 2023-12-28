@@ -11,8 +11,17 @@ export default async function middleware(req) {
   }
 
   try {
-    await jose.jwtVerify(token, encodedJwtSecret);
-    return NextResponse.next();
+    const { payload } = await jose.jwtVerify(token, encodedJwtSecret);
+    const headers = new Headers(req.headers);
+    headers.set("middlewareSet", payload.role);
+
+    const resp = NextResponse.next({
+      request: {
+        headers,
+      },
+    });
+
+    return resp;
   } catch (error) {
     console.log({ error });
     return NextResponse.redirect(new URL("/login", req.url));
@@ -20,5 +29,5 @@ export default async function middleware(req) {
 }
 
 export const config = {
-  matcher: "/dashboard",
+  matcher: ["/dashboard", "/dashboard/reviews"],
 };

@@ -1,7 +1,6 @@
-import React from 'react'
+import { DashboardTemplate } from "@/components/dashboard/components/dashboardTemplate.jsx";
+import React from "react";
 
-export default function Page({children}) {
-  return (
-    <div>{children}</div>
-  )
+export default function Page({ children }) {
+  return <DashboardTemplate>{children}</DashboardTemplate>;
 }
