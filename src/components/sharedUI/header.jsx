@@ -13,7 +13,7 @@ export const Header = () => {
                         height={26}
                     />
                     <Link href="/" className=" text-violet text-2xl font-semibold">
-                        Buildletin
+                        Pakarya
                     </Link>
                 </div>
             </div>
