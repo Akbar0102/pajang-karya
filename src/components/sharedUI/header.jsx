@@ -20,12 +20,12 @@ export const Header = () => {
 
             <div className=" flex items-center justify-evenly w-full sm:justify-end sm:w-1/2 gap-0.5">
                 <Link href="/login">
-                    <Button className=" font-medium text-base hover:text-white hover:bg-black-100 py-3 px-6 bg-white text-black-100">
+                    <Button className=" font-medium text-base hover:text-[#565564] py-3 px-6 bg-white text-black-100">
                         Login
                     </Button>
                 </Link>
                 <Link href="/register">
-                    <Button className=" font-medium text-base hover:text-white hover:bg-black-100 py-3 px-6 bg-white text-black-100">
+                    <Button className=" font-medium text-base hover:bg-[#565564] py-3 px-6 bg-slate-900 text-white">
                         Sign up
                     </Button>
                 </Link>
