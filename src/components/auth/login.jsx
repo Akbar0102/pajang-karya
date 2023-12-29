@@ -31,26 +31,28 @@ export const Login = () => {
   }
 
   return (
-    <div className="w-[360px] space-y-8">
-      <div>
+    <div className="w-[460px] space-y-8">
+      <div className="space-y-2">
         <h3>Login</h3>
-        <p>Welcome back!</p>
+        <p className="w-[425px] text-justify">
+          <span className="font-bold tracking-tight mr-1">Pakarya</span>
+          help you to exhibit your learning projects, share your coding triumphs
+          and engage with other newly developer.
+        </p>
       </div>
       <form onSubmit={handleLogin} className="space-y-3">
         <div className="space-y-2">
-          <Input name="email" placeholder="Email" />
-          <Input name="password" placeholder="Password" type="password" />
+          <Input name="email" label="Email" type="email" isRequired/>
+          <Input name="password" label="Password" type="password" isRequired/>
           <Button type="submit" color="primary" className="w-full">
             Login
           </Button>
         </div>
-        <div>
-          <p>
-            Don't have an accout?{" "}
-            <Link href="/register">
-              <span className="link">Register</span>
-            </Link>
-          </p>
+        <div className="flex space-x-1">
+          <p>Don&apos;t have an account?</p>
+          <Link href="/register" className="link">
+            Sign up
+          </Link>
         </div>
       </form>
     </div>
