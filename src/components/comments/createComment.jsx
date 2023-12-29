@@ -1,4 +1,4 @@
-import { Button, Input, Textarea } from '@nextui-org/react'
+import { Button, Textarea } from '@nextui-org/react'
 import React from 'react'
 
 export const CreateComment = () => {

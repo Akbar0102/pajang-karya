@@ -7,7 +7,7 @@ import { CreateComment } from "../comments/createComment"
 import { imageUrl } from "@/config/apiUrl"
 
 export const ProjectSingle = ({ data }) => {
-    const { id, name, user, featuredImage, description, repository, link, tech } = data
+    const { id, name, user, featuredImage, description, repository, link, tech, comment } = data
     const { username } = user
     return (
         <>
@@ -68,7 +68,7 @@ export const ProjectSingle = ({ data }) => {
 
                 <section className=" mt-14">
                     <h2 className=" text-black-50 font-semibold text-4xl mb-[30px]">Comment</h2>
-                    <AllComments />
+                    <AllComments commentsData={comment} />
                 </section>
 
                 <CreateComment />
