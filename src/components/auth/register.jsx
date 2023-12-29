@@ -1,11 +1,13 @@
 "use client";
 
 import { Button, Input, Select, SelectItem, Textarea } from "@nextui-org/react";
-import React from "react";
 import toast from "react-hot-toast";
 import Link from "next/link.js";
+import { useState } from 'react';
 
 export const Register = () => {
+  const [loading, setLoading] = useState(false);
+
   async function handleRegister(event) {
     event.preventDefault(); // Ga akan nge refresh
     const firstName = event.target.firstName.value;
@@ -15,6 +17,8 @@ export const Register = () => {
     const password = event.target.password.value;
     const role = event.target.role.value;
     const about = event.target.about.value;
+
+    setLoading(true);
 
     const res = await fetch("/api/users/register", {
       method: "POST",
@@ -30,6 +34,7 @@ export const Register = () => {
     });
     const data = await res.json();
     toast.success(data.message);
+    setLoading(false);
   }
 
   return (
@@ -61,7 +66,7 @@ export const Register = () => {
             <SelectItem key="expert">Expert</SelectItem>
           </Select>
           <Textarea name="about" label="A little about yourself" isRequired/>
-          <Button color="primary" type="submit" className="w-full">
+          <Button color="primary" type="submit" className="w-full" isLoading={loading}>
             Register
           </Button>
         </div>
