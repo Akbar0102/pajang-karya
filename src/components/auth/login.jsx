@@ -1,18 +1,21 @@
 "use client";
 
 import { Button, Input } from "@nextui-org/react";
-import React from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import Link from "next/link.js";
+import { useState } from 'react';
 
 export const Login = () => {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   async function handleLogin(event) {
     event.preventDefault(); // Ga akan nge refresh
     const email = event.target.email.value;
     const password = event.target.password.value;
+
+    setLoading(true);
 
     const res = await fetch("/api/users/login", {
       method: "POST",
@@ -26,6 +29,8 @@ export const Login = () => {
     }
 
     toast.success(message);
+
+    setLoading(false);
 
     setTimeout(() => router.push("/dashboard"), 2000);
   }
@@ -44,7 +49,7 @@ export const Login = () => {
         <div className="space-y-2">
           <Input name="email" label="Email" type="email" isRequired/>
           <Input name="password" label="Password" type="password" isRequired/>
-          <Button type="submit" color="primary" className="w-full">
+          <Button type="submit" color="primary" className="w-full" isLoading={loading}>
             Login
           </Button>
         </div>
