@@ -4,8 +4,13 @@ import React from "react";
 import Link from "next/link";
 import { Activity, Box, LayoutList } from "lucide-react";
 import Cookies from "js-cookie";
+import { useAtom } from 'jotai';
+import { roleAtom } from "../atom/dashboardAtom.js";
 
-export const Menu = ({ role }) => {
+export const Menu = ({role}) => {
+  const [roles, setRoles] = useAtom(roleAtom);
+  setRoles(role)
+
   const handleLogout = () => {
     // Delete the 'token' cookie
     Cookies.remove("token");

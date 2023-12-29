@@ -1,7 +1,13 @@
+"use client"
+
 import { Card, CardBody } from "@nextui-org/react";
 import React from "react";
+import { useAtom } from 'jotai';
+import { roleAtom } from "../atom/dashboardAtom.js";
 
-export const Dashboard = ({ role }) => {
+export const Dashboard = () => {
+  const [role, setRole] = useAtom(roleAtom);
+
   return (
     <main className="space-y-8">
       <section>
@@ -10,7 +16,7 @@ export const Dashboard = ({ role }) => {
       </section>
       {role === "expert" && (
         <>
-          <section className="grid grid-cols-3 gap-6">
+          <section className="grid grid-cols-4 gap-6">
             <Card shadow="sm">
               <CardBody className="p-8 space-y-4">
                 <h6>Reviewed Project</h6>

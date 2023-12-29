@@ -15,6 +15,23 @@ export async function GET(request) {
       where: {
         userId: userId,
       },
+      include: {
+        project: {
+          select: {
+            id: true,
+            name: true,
+            featuredImage: true,
+            slug: true,
+            user: {
+              select: {
+                username: true,
+                firstName: true,
+                lastName: true,
+              },
+            },
+          },
+        },
+      },
     });
     return NextResponse.json(
       { data: myReview, message: "Review fetched successfully" },
