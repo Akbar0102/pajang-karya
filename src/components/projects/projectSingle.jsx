@@ -71,7 +71,7 @@ export const ProjectSingle = ({ data }) => {
                     <AllComments commentsData={comment} />
                 </section>
 
-                <CreateComment />
+                <CreateComment projectId={id} />
             </main>
             <Footer />
         </>
