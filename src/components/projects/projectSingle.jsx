@@ -24,11 +24,11 @@ export const ProjectSingle = ({ data }) => {
             <Header />
             <main className=" mx-[100px] mt-[173px]">
                 <section>
-                    <h1 className=" text-[52px] text-black-50 font-[800] mb-3">{name}</h1>
+                    <h1 className=" text-[52px] text-black-50 font-[800] mb-3 break-all">{name}</h1>
                     <div className=" flex gap-1 items-center">
                         <Avatar name={username} radius="full" />
                         <Link href={`/${username}`}>
-                            <p className=" font-normal text-grey text-[32px] hover:text-violet">{username}</p>
+                            <p className=" font-normal text-grey text-[32px] hover:text-violet break-all">{username}</p>
                         </Link>
                     </div>
                     <Image
