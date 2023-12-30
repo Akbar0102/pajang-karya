@@ -57,6 +57,21 @@ export async function GET(request) {
               username: true,
             },
           },
+          comment: {
+            select: {
+              id: true,
+              content: true,
+              createdAt: true,
+              user: {
+                select: {
+                  id: true,
+                  username: true,
+                  firstName: true,
+                  lastName: true,
+                },
+              },
+            },
+          }
         },
       });
 
