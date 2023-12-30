@@ -12,7 +12,7 @@ export const ProjectCard = ({ id, name, featuredImage, slug, username }) => {
                     <Image
                         alt="Card background"
                         className=" m-0 w-[287px] h-[226px] rounded-3xl"
-                        src={`${imageUrl}/projects/tr:w-300,h-200,c-at_max/${id}/${featuredImage}`}
+                        src={`${imageUrl}/projects/tr:w-300,h-200/${id}/${featuredImage}`}
                         width={287}
                         height={226}
                     />
