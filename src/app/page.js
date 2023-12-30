@@ -30,10 +30,9 @@ export default async function Home({ searchParams }) {
           <p className=" mt-5 text-grey">Encourage your fellow developer by giving a positive feedback</p>
         </section>
 
-        <section className=" flex flex-col items-center mt-[130px]">
+        <section className=" flex flex-col items-center mt-[130px] my-[160px]">
           <h2 className=" font-semibold text-4xl pb-[53px]">Explore project</h2>
           <AllProjects projectsData={data} />
-          <Button radius="full" className=" font-medium text-lg text-grey bg-white px-6 py-3.5 border-1.5 my-[53px]">View More</Button>
         </section>
 
         <section className=" grid xl:grid-cols-2 xl:gap-12 justify-center xl:mx-[185px] mx-8 mt-[53px]">
