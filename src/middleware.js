@@ -6,7 +6,7 @@ export default async function middleware(req) {
   const encodedJwtSecret = new TextEncoder().encode(jwtSecret);
   const token = req.cookies.get("token")?.value;
 
-  if ((req.nextUrl.pathname === "/" || req.nextUrl.pathname.match(/^\/[^/]+\/[^/]+$/)) && !token) {
+  if ((req.nextUrl.pathname === "/" || req.nextUrl.pathname.match(/^\/[^/]+\/[^/]+$/) || req.nextUrl.pathname.match(req.nextUrl.pathname.match(/^\/[^/]+$/))) && !token) {
     // Allow access to the root path without a token
     return NextResponse.next();
   }
