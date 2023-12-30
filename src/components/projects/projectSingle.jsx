@@ -24,10 +24,12 @@ export const ProjectSingle = ({ data }) => {
             <Header />
             <main className=" mx-[100px] mt-[173px]">
                 <section>
-                    <h1 className=" text-[52px] text-black-50 font-[800]">{name}</h1>
+                    <h1 className=" text-[52px] text-black-50 font-[800] mb-3">{name}</h1>
                     <div className=" flex gap-1 items-center">
                         <Avatar name={username} radius="full" />
-                        <p className=" font-normal text-grey text-[32px]">{username}</p>
+                        <Link href={`/${username}`}>
+                            <p className=" font-normal text-grey text-[32px] hover:text-violet">{username}</p>
+                        </Link>
                     </div>
                     <Image
                         className=" mt-16 rounded-3xl"
@@ -39,14 +41,14 @@ export const ProjectSingle = ({ data }) => {
                 </section>
 
                 <section className=" mt-32 min-h-96">
-                    <div className=" grid grid-cols-3">
-                        <div className=" col-span-2">
+                    <div className=" sm:grid sm:grid-cols-3 flex flex-col gap-y-6">
+                        <div className=" sm:col-span-2">
                             <h2 className=" text-black-50 font-semibold text-4xl mb-2">Overview</h2>
                             <p className=" text-xl font-medium pr-4">
                                 {description}
                             </p>
                         </div>
-                        <div>
+                        <div className=" flex flex-col gap-y-6">
                             <div>
                                 <h2 className=" text-black-50 font-semibold text-4xl mb-2">Link</h2>
                                 <div className=" flex gap-1 mb-2 ml-2">
@@ -65,10 +67,8 @@ export const ProjectSingle = ({ data }) => {
                                         {link}
                                     </a>
                                 </div>
-
-
                             </div>
-                            <div className=" mt-[109px]">
+                            <div className=" sm:mt-[109px]">
                                 <h2 className=" text-black-50 font-semibold text-4xl mb-2">Tech stack</h2>
                                 <p className=" text-xl font-medium">{tech}</p>
                             </div>
@@ -81,10 +81,10 @@ export const ProjectSingle = ({ data }) => {
                     <AllComments commentsData={comment} />
                 </section>
 
-                {token ? (<CreateComment projectId={id} />) : 
+                {token ? (<CreateComment projectId={id} />) :
                     (<p className=" text-xl font-medium pr-4 mb-5">
                         Please login to give comment
-                    </p>) }
+                    </p>)}
             </main>
             <Footer />
         </>

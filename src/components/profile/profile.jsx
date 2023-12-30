@@ -6,11 +6,11 @@ export const Profile = ({ profileData }) => {
     const { username, project, firstName, lastName, about } = profileData
     return (
         <div className=' mx-[100px] my-48 flex-grow'>
-            <section className=' flex items-center gap-3'>
+            <section className=' flex flex-col sm:flex-row items-center gap-3'>
                 <Avatar name={username} className=' w-32 h-32 text-large' />
                 <div className=' flex flex-col gap-y-3'>
-                    <h1 className=' font-bold text-[52px] text-black-50'>{username}</h1>
-                    <p className=' font-normal text-xl text-black-100'>{`${firstName} ${lastName}`}</p>
+                    <h1 className=' font-bold text-[52px] text-black-50 break-all'>{username}</h1>
+                    <p className=' font-normal text-xl text-black-100 break-all'>{`${firstName} ${lastName}`}</p>
                 </div>
             </section>
 

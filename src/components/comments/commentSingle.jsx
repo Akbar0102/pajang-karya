@@ -9,7 +9,7 @@ export const CommentSingle = ({ id, content, username, createdAt }) => {
         <div>
             <div className=" flex items-center gap-4">
                 <Link href={`/${username}`}>
-                    <p className=" text-[32px] font-normal text-grey">
+                    <p className=" text-[32px] font-normal text-grey hover:text-violet">
                         {username}
                     </p>
                 </Link>
