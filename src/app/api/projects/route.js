@@ -6,6 +6,26 @@ import { verify } from "jsonwebtoken";
 import { cookies } from "next/headers";
 import string from "@/lib/string.js";
 
+async function createUniqueSlug(name) {
+  let slug = slugify(name, { lower: true, replacement: "-" });
+  let counter = 1;
+
+  while (true) {
+    const existingProject = await prisma.project.findUnique({
+      where: {
+        slug,
+      },
+    });
+
+    if (!existingProject) {
+      return slug;
+    }
+
+    counter += 1;
+    slug = `${slug}-${counter}`;
+  }
+}
+
 export async function GET(request) {
   const searchParams = request.nextUrl.searchParams;
   const slug = searchParams.get("slug");
@@ -71,7 +91,7 @@ export async function GET(request) {
                 },
               },
             },
-          }
+          },
         },
       });
 
@@ -82,6 +102,9 @@ export async function GET(request) {
     }
 
     projects = await prisma.project.findMany({
+      orderBy: {
+        createdAt: "desc", 
+      },
       include: {
         comment: {
           select: {
@@ -135,13 +158,14 @@ export async function POST(request) {
   const userId = decoded.id;
 
   let projectId = "";
+  const slug = await createUniqueSlug(name);
 
   // Save project ke database
   try {
     const createProject = await prisma.project.create({
       data: {
         name,
-        slug: slugify(name, { lower: true, replacement: "-" }),
+        slug,
         description,
         featuredImage: featuredImage ? featuredImage.name : undefined,
         category,
