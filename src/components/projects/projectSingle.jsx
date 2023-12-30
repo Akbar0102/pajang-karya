@@ -5,8 +5,18 @@ import Link from "next/link"
 import { AllComments } from "../comments/allComments"
 import { CreateComment } from "../comments/createComment"
 import { imageUrl } from "@/config/apiUrl"
+import { cookies, headers } from "next/headers";
 
 export const ProjectSingle = ({ data }) => {
+    const token = cookies().get("token")?.value;
+    let parsedPayload;
+
+    if (token) {
+        const headersList = headers();
+        const payload = headersList.get("middlewareSet");
+        parsedPayload = JSON.parse(payload);
+    }
+
     const { id, name, user, featuredImage, description, repository, link, tech, comment } = data
     const { username } = user
     return (
@@ -71,7 +81,10 @@ export const ProjectSingle = ({ data }) => {
                     <AllComments commentsData={comment} />
                 </section>
 
-                <CreateComment projectId={id} />
+                {token ? (<CreateComment projectId={id} />) : 
+                    (<p className=" text-xl font-medium pr-4 mb-5">
+                        Please login to give comment
+                    </p>) }
             </main>
             <Footer />
         </>
