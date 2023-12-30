@@ -7,7 +7,7 @@ async function getData(projectSlug) {
   return data;
 }
 
-export default async function Page({params}) {
+export default async function Page({ params }) {
   const { username, projectSlug } = params;
   const { data } = await getData(projectSlug)
   return <ProjectSingle data={data} />

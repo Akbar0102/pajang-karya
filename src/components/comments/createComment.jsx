@@ -37,9 +37,9 @@ export const CreateComment = ({ projectId }) => {
         }
     }
     return (
-        <div className=' flex items-center gap-12 mb-[120px] mt-[70px]'>
-            <Textarea className=' rounded-3xl w-[60%]' variant='bordered' placeholder='Write a comment...' name='content' onChange={e => setContent(e.target.value)} value={content} />
-            <Button type='submit' className=' text-white text-2xl font-medium bg-violet px-6 py-[14px]' onClick={handleSubmitComment} isLoading={loading}>
+        <div className=' flex flex-col sm:flex-row items-center gap-12 gap-y-6 mb-[120px] mt-[70px]'>
+            <Textarea className=' rounded-3xl sm:w-[60%] w-full' variant='bordered' placeholder='Write a comment...' name='content' onChange={e => setContent(e.target.value)} value={content} />
+            <Button type='submit' className=' text-white text-2xl font-medium bg-violet px-6 py-[14px] w-full sm:w-fit' onClick={handleSubmitComment} isLoading={loading}>
                 Submit
             </Button>
         </div>

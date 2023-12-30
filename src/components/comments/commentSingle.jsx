@@ -1,15 +1,18 @@
 import { formatDate } from "@/utils/formatDate";
+import Link from "next/link";
 
 export const CommentSingle = ({ id, content, username, createdAt }) => {
-   
+
 
     const formattedDate = formatDate(createdAt);
     return (
         <div>
             <div className=" flex items-center gap-4">
-                <p className=" text-[32px] font-normal text-grey">
-                    {username}
-                </p>
+                <Link href={`/${username}`}>
+                    <p className=" text-[32px] font-normal text-grey hover:text-violet">
+                        {username}
+                    </p>
+                </Link>
                 <p className=" text-base font-normal text-grey">
                     {formattedDate}
                 </p>
