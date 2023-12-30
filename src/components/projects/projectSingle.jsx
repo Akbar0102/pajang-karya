@@ -78,7 +78,7 @@ export const ProjectSingle = ({ data }) => {
 
                 <section className=" mt-14">
                     <h2 className=" text-black-50 font-semibold text-4xl mb-[30px]">Comment</h2>
-                    <AllComments commentsData={comment} />
+                    <AllComments commentsData={comment} currentUser={parsedPayload ? parsedPayload.id : null} />
                 </section>
 
                 {token ? (<CreateComment projectId={id} />) :
