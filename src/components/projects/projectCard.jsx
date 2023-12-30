@@ -23,8 +23,12 @@ export const ProjectCard = ({ id, name, featuredImage, slug, username }) => {
                     <p className=" text-lg font-semibold hover:text-violet">{name}</p>
                 </Link>
                 <div className=" flex gap-1 items-center">
-                    <Avatar name={username} radius="full" />
-                    <p className=" font-normal text-grey text-base">{username}</p>
+                    <Link href={`/${username}`}>
+                        <Avatar name={username} radius="full" />
+                    </Link>
+                    <Link href={`/${username}`}>
+                        <p className=" font-normal text-grey text-base hover:text-black-100">{username}</p>
+                    </Link>
                 </div>
 
             </CardFooter>
