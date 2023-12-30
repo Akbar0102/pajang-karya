@@ -85,6 +85,7 @@ export const ProjectSingle = ({ data }) => {
                     (<p className=" text-xl font-medium pr-4 mb-5">
                         Please login to give comment
                     </p>)}
+
             </main>
             <Footer />
         </>
