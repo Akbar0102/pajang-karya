@@ -31,8 +31,7 @@ export const Login = () => {
     toast.success(message);
 
     setLoading(false);
-
-    setTimeout(() => router.push("/dashboard"), 2000);
+    router.push("/dashboard")
   }
 
   return (
