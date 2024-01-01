@@ -1,7 +1,8 @@
+import { DashTemplate } from '@/components/dashboard/components/dashTemplate'
 import React from 'react'
 
 export default function Page({children}) {
   return (
-    <div>{children}</div>
+    <DashTemplate>{children}</DashTemplate>
   )
 }
