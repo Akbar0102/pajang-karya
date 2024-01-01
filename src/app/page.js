@@ -25,9 +25,9 @@ export default async function Home({ searchParams }) {
       <Header />
       <main>
         <section className=" flex flex-col items-center justify-center mt-[130px]">
-          <Button radius="full" className=" bg-black-100 px-6 py-4 text-white font-normal text-base">Over 3 million interesting project!</Button>
-          <h1 className=" mt-5 text-[52px] text-center text-black-50">Show your code<br/><br/>learning journey</h1>
-          <p className=" mt-5 text-grey sm:w-[512px] sm:text-center">Join developers building real-world project, let expert review your project, and give supporting feedback each others</p>
+          <Button radius="full" className=" bg-black-100 px-6 py-4 text-white font-normal text-base">Showcase, Learn, and Grow: A Platform for Coders!</Button>
+          <h1 className=" mt-5 text-[52px] text-center text-black-50">Show your code<br/><br/><span className="text-primary-500">learning journey</span></h1>
+          <p className=" mt-5 text-grey sm:w-[512px] sm:text-center">Join developers building real-world project, let expert review your code, and give supporting feedback each others</p>
         </section>
 
         <section className=" flex flex-col items-center mt-[130px] my-[160px]">
