@@ -56,6 +56,8 @@ export async function GET(request) {
           user: {
             select: {
               username: true,
+              firstName: true,
+              lastName: true,
             },
           },
         },
@@ -75,6 +77,8 @@ export async function GET(request) {
           user: {
             select: {
               username: true,
+              firstName: true,
+              lastName: true,
             },
           },
           comment: {
@@ -123,6 +127,8 @@ export async function GET(request) {
         user: {
           select: {
             username: true,
+            firstName: true,
+            lastName: true,
           },
         },
       },
