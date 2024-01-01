@@ -1,4 +1,4 @@
-import { Avatar, Image, user } from "@nextui-org/react"
+import { Avatar, Image } from "@nextui-org/react"
 import { Footer } from "../sharedUI/footer"
 import { Header } from "../sharedUI/header"
 import Link from "next/link"
@@ -18,7 +18,7 @@ export const ProjectSingle = ({ data }) => {
     }
 
     const { id, name, user, featuredImage, description, repository, link, tech, comment } = data
-    const { username } = user
+    const { username, firstName, lastName } = user
     return (
         <>
             <Header />
@@ -26,9 +26,9 @@ export const ProjectSingle = ({ data }) => {
                 <section>
                     <h1 className=" text-[52px] text-black-50 font-[800] mb-3 break-all">{name}</h1>
                     <div className=" flex gap-1 items-center">
-                        <Avatar name={username} radius="full" />
+                        <Avatar name={username} radius="full" color="primary"/>
                         <Link href={`/${username}`}>
-                            <p className=" font-normal text-grey text-[32px] hover:text-violet break-all">{username}</p>
+                            <p className=" font-normal text-grey text-[32px] hover:text-violet break-all">{`${firstName} ${lastName}`}</p>
                         </Link>
                     </div>
                     <Image

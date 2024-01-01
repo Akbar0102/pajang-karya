@@ -26,6 +26,7 @@ export const AllProjects = ({ projectsData }) => {
                   name={name}
                   slug={slug}
                   username={user.username}
+                  fullname={`${user.firstName} ${user.lastName}`}
                 />
               );
             })}

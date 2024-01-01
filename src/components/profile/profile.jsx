@@ -7,10 +7,10 @@ export const Profile = ({ profileData }) => {
     return (
         <div className=' mx-[100px] my-48 flex-grow'>
             <section className=' flex flex-col sm:flex-row items-center gap-3'>
-                <Avatar name={username} className=' w-32 h-32 text-large' />
+                <Avatar name={username} className=' w-32 h-32 text-large' color="primary"/>
                 <div className=' flex flex-col gap-y-3'>
-                    <h1 className=' font-bold text-[52px] text-black-50 break-all'>{username}</h1>
-                    <p className=' font-normal text-xl text-black-100 break-all'>{`${firstName} ${lastName}`}</p>
+                    <h1 className=' font-bold text-[52px] text-black-50 break-all'>{`${firstName} ${lastName}`}</h1>
+                    <p className=' font-normal text-xl text-black-100 break-all'>{username}</p>
                 </div>
             </section>
 

@@ -1,9 +1,9 @@
 "use client"
-import { Card, CardBody, Image, CardFooter, user, Avatar } from "@nextui-org/react";
+import { Card, CardBody, Image, CardFooter, Avatar } from "@nextui-org/react";
 import { imageUrl } from "@/config/apiUrl";
 import Link from "next/link";
 
-export const ProjectCard = ({ id, name, featuredImage, slug, username }) => {
+export const ProjectCard = ({ id, name, featuredImage, slug, username, fullname }) => {
 
     return (
         <Card className=" w-[287px] h-[322px] rounded-3xl">
@@ -24,10 +24,10 @@ export const ProjectCard = ({ id, name, featuredImage, slug, username }) => {
                 </Link>
                 <div className=" flex gap-1 items-center">
                     <Link href={`/${username}`}>
-                        <Avatar name={username} radius="full" />
+                        <Avatar name={fullname} radius="full" color="primary"/>
                     </Link>
                     <Link href={`/${username}`}>
-                        <p className=" font-normal text-grey text-base hover:text-black-100">{username}</p>
+                        <p className=" font-normal text-grey text-base hover:text-black-100">{fullname}</p>
                     </Link>
                 </div>
 
