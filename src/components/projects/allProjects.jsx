@@ -5,15 +5,15 @@ import { ProjectCard } from "./projectCard";
 import { Button, Image } from "@nextui-org/react";
 
 export const AllProjects = ({ projectsData }) => {
-  const [visibleProjects, setVisibleProjects] = useState(4);
+  const [visibleProjects, setVisibleProjects] = useState(6);
 
   function handleLoadMore() {
-    setVisibleProjects((prev) => prev + 4);
+    setVisibleProjects((prev) => prev + 6);
   }
 
   return (
     <>
-      <section className="grid xl:grid-cols-4 md:grid-cols-2 gap-x-6 gap-y-[53px] lg:px-[100px]">
+      <section className="grid xl:grid-cols-3 md:grid-cols-2 gap-x-6 gap-y-[53px] lg:px-[100px]">
         {projectsData &&
           projectsData
             .slice(0, visibleProjects)
