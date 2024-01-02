@@ -6,6 +6,26 @@ import { verify } from "jsonwebtoken";
 import { cookies } from "next/headers";
 import string from "@/lib/string.js";
 
+async function createUniqueSlug(name) {
+  let slug = slugify(name, { lower: true, replacement: "-" });
+  let counter = 1;
+
+  while (true) {
+    const existingProject = await prisma.project.findUnique({
+      where: {
+        slug,
+      },
+    });
+
+    if (!existingProject) {
+      return slug;
+    }
+
+    counter += 1;
+    slug = `${slug}-${counter}`;
+  }
+}
+
 export async function GET(request) {
   const searchParams = request.nextUrl.searchParams;
   const slug = searchParams.get("slug");
@@ -36,6 +56,8 @@ export async function GET(request) {
           user: {
             select: {
               username: true,
+              firstName: true,
+              lastName: true,
             },
           },
         },
@@ -55,6 +77,23 @@ export async function GET(request) {
           user: {
             select: {
               username: true,
+              firstName: true,
+              lastName: true,
+            },
+          },
+          comment: {
+            select: {
+              id: true,
+              content: true,
+              createdAt: true,
+              user: {
+                select: {
+                  id: true,
+                  username: true,
+                  firstName: true,
+                  lastName: true,
+                },
+              },
             },
           },
         },
@@ -67,6 +106,9 @@ export async function GET(request) {
     }
 
     projects = await prisma.project.findMany({
+      orderBy: {
+        createdAt: "desc", 
+      },
       include: {
         comment: {
           select: {
@@ -85,6 +127,8 @@ export async function GET(request) {
         user: {
           select: {
             username: true,
+            firstName: true,
+            lastName: true,
           },
         },
       },
@@ -120,13 +164,14 @@ export async function POST(request) {
   const userId = decoded.id;
 
   let projectId = "";
+  const slug = await createUniqueSlug(name);
 
   // Save project ke database
   try {
     const createProject = await prisma.project.create({
       data: {
         name,
-        slug: slugify(name, { lower: true, replacement: "-" }),
+        slug,
         description,
         featuredImage: featuredImage ? featuredImage.name : undefined,
         category,
@@ -170,95 +215,4 @@ export async function POST(request) {
     },
     { status: 201 }
   );
-}
-
-export async function PUT(request) {
-  const { projectId } = request.params;
-
-  const formData = await request.formData();
-  const name = formData.get("name");
-  const description = formData.get("description");
-  const featuredImage = formData.get("featuredImage");
-  const category = formData.get("category");
-  const type = formData.get("type");
-  const link = formData.get("link");
-  const repository = formData.get("repository");
-  const tech = formData.get("tech");
-
-  // Get user id from token
-  const cookieStore = cookies();
-  const token = cookieStore.get("token").value;
-  const decoded = verify(token, process.env.JWT_SECRET);
-  const userId = decoded.id;
-
-  try {
-    const updateProject = await prisma.project.update({
-      where: {
-        id: projectId,
-      },
-      data: {
-        name,
-        slug: slugify(name, { lower: true, replacement: "-" }),
-        description,
-        featuredImage: featuredImage ? featuredImage.name : undefined,
-        category,
-        type,
-        link,
-        repository,
-        tech: string.lowerCaseString(tech),
-        userId,
-      },
-    });
-
-    // Send Image ke AWS S3 jika featuredImage diubah
-    if (featuredImage) {
-      await uploadFile({
-        Body: featuredImage,
-        Key: featuredImage.name,
-        ContentType: featuredImage.type,
-        Dir: `projects/${projectId}`,
-      });
-    }
-
-    return NextResponse.json(
-      {
-        message: "Project updated successfully",
-        data: updateProject,
-      },
-      { status: 200 }
-    );
-  } catch (error) {
-    console.log(error);
-    return NextResponse.json(
-      { errorMessage: "Something went wrong. Please try again later" },
-      { status: 500 }
-    );
-  }
-}
-
-export async function DELETE(request) {
-  const { projectId } = request.params;
-
-  try {
-    // Hapus proyek dari database
-    const deletedProject = await prisma.project.delete({
-      where: {
-        id: projectId,
-      },
-    });
-
-    return NextResponse.json(
-      {
-        message: "Project deleted successfully",
-        data: deletedProject,
-      },
-      { status: 200 }
-    );
-  } catch (error) {
-    console.log(error);
-    return NextResponse.json(
-      { errorMessage: "Something went wrong. Please try again later" },
-      { status: 500 }
-    );
-  }
 }

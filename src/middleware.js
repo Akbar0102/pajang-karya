@@ -6,13 +6,27 @@ export default async function middleware(req) {
   const encodedJwtSecret = new TextEncoder().encode(jwtSecret);
   const token = req.cookies.get("token")?.value;
 
-  if (!token) {
+  if (req.nextUrl.pathname.includes("/dashboard") && !token) {
     return NextResponse.redirect(new URL("/login", req.url));
   }
 
-  try {
-    await jose.jwtVerify(token, encodedJwtSecret);
+  if ((req.nextUrl.pathname === "/" || req.nextUrl.pathname.match(/^\/[^/]+\/[^/]+$/) || req.nextUrl.pathname.match(req.nextUrl.pathname.match(/^\/[^/]+$/))) && !token) {
+    // Allow access to the root path without a token
     return NextResponse.next();
+  }
+  
+  try {
+    const { payload } = await jose.jwtVerify(token, encodedJwtSecret);
+    const headers = new Headers(req.headers);
+    headers.set("middlewareSet", JSON.stringify(payload));
+
+    const resp = NextResponse.next({
+      request: {
+        headers,
+      },
+    });
+
+    return resp;
   } catch (error) {
     console.log({ error });
     return NextResponse.redirect(new URL("/login", req.url));
@@ -20,5 +34,9 @@ export default async function middleware(req) {
 }
 
 export const config = {
-  matcher: "/dashboard",
+  matcher: [
+    "/",
+    "/dashboard",
+    "/((?!api|_next/static|_next/image|favicon.ico|login|register|images).*)",
+  ],
 };
