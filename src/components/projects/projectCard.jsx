@@ -6,15 +6,13 @@ import Link from "next/link";
 export const ProjectCard = ({ id, name, featuredImage, slug, username, fullname }) => {
 
     return (
-        <Card className=" w-[287px] h-[322px] rounded-3xl">
-            <CardBody className="overflow-visible p-0">
+        <Card className=" w-[416px] h-[352px] rounded-3xl">
+            <CardBody className="overflow-visible p-0 flex items-center justify-center bg-primary-400/15">
                 <Link href={`/${username}/${slug}`}>
                     <Image
                         alt="Card background"
-                        className=" m-0 w-[287px] h-[226px] rounded-3xl"
-                        src={`${imageUrl}/projects/tr:w-300,h-200/${id}/${featuredImage}`}
-                        width={287}
-                        height={226}
+                        className=" m-auto w-[356px] h-[238px] rounded-3xl"
+                        src={`${imageUrl}/projects/tr:w-356,h-238,c-at_max/${id}/${featuredImage}`}
                     />
                 </Link>
             </CardBody>

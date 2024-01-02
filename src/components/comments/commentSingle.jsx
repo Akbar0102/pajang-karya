@@ -2,7 +2,7 @@ import { formatDate } from "@/utils/formatDate";
 import Link from "next/link";
 import { DeleteComment } from "./deleteComment";
 
-export const CommentSingle = ({ id, content, username, userId, createdAt, currentUser }) => {
+export const CommentSingle = ({ id, content, username, userId, createdAt, currentUser, firstName, lastName }) => {
     const formattedDate = formatDate(createdAt);
 
 
@@ -11,7 +11,7 @@ export const CommentSingle = ({ id, content, username, userId, createdAt, curren
             <div className=" flex flex-col sm:flex-row items-start gap-4">
                 <Link href={`/${username}`}>
                     <p className=" text-[32px] font-normal text-grey hover:text-violet">
-                        {username}
+                        {`${firstName} ${lastName}`}
                     </p>
                 </Link>
                 <p className=" text-base font-normal text-grey">

@@ -1,4 +1,4 @@
-import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
+import { S3Client, PutObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
 
 const s3Client = new S3Client({
   region: process.env.AWSS3_REGION,
@@ -8,7 +8,7 @@ const s3Client = new S3Client({
   },
   endpoint: {
     url: "https://s3.ap-southeast-1.wasabisys.com",
-  }
+  },
 });
 
 export async function uploadFile({ Body, Key, ContentType, Dir }) {
@@ -27,5 +27,25 @@ export async function uploadFile({ Body, Key, ContentType, Dir }) {
     console.log(res);
   } catch (error) {
     console.log(error);
+  }
+}
+
+export async function deleteFile({ Key, Dir }) {
+  try {
+    const fileKey = `${Dir}/${Key}`;
+
+    const command = new DeleteObjectCommand({
+      Bucket: process.env.AWSS3_BUCKET,
+      Key: fileKey,
+    });
+
+    const response = await s3Client.send(command);
+    console.log(response);
+
+    // return NextResponse.json({ message: 'File deleted successfully' }, { status: 200 });
+  } catch (error) {
+    console.error(error);
+
+    // return NextResponse.json({ errorMessage: 'Failed to delete file' }, { status: 500 });
   }
 }

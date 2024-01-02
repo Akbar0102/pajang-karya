@@ -34,7 +34,7 @@ export const ProjectSingle = ({ data }) => {
                     <Image
                         className=" mt-16 rounded-3xl"
                         alt="project-featured-image"
-                        src={`${imageUrl}/projects/tr:w-400,h-400,c-at_max/${id}/${featuredImage}`}
+                        src={`${imageUrl}/projects/tr:w-856,h-572,c-at_max/${id}/${featuredImage}`}
                     />
                 </section>
 
