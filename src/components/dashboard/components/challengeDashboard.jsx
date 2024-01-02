@@ -5,22 +5,16 @@ export const Challenge=()=>{
     return(
         <main className="space-y-8">
       <section className="flex flex-col gap-2">
-        <h1 className="text-xl font-semibold ">Dashboard</h1>
-        <p>This is your progressssssssssssss so far, you rock it🤟.</p>
+        <h1 className="text-xl font-semibold ">Challenge</h1>
+        <p>you got it.</p>
       </section>
       <section className="grid grid-cols-2 gap-6">
         <Card shadow="sm">
           <CardBody className="p-8 space-y-4">
-            <h6>Project Count</h6>
-            <h1>0</h1>
+            <h6>There's no available challenge yet.</h6>
           </CardBody>
         </Card>
-        <Card shadow="sm">
-          <CardBody className="p-8 space-y-4">
-            <h6>Challenge Done</h6>
-            <h1>0</h1>
-          </CardBody>
-        </Card>
+
         
       </section>
     </main>
