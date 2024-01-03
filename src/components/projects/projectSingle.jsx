@@ -42,7 +42,7 @@ export const ProjectSingle = ({ data }) => {
                     <div className=" sm:grid sm:grid-cols-3 flex flex-col gap-y-6">
                         <div className=" sm:col-span-2">
                             <h2 className=" text-black-50 font-semibold text-4xl mb-2">Overview</h2>
-                            <p className=" text-xl font-medium pr-4">
+                            <p className=" text-xl font-medium pr-4 text-justify">
                                 {description}
                             </p>
                         </div>
