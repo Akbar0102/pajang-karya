@@ -17,15 +17,18 @@ export async function POST(request) {
     const joinChallenge = await prisma.userChallenge.create({
       data: {
         status,
-        challengeId,
-        userId,
+        challenge: { connect: { id: challengeId } },
+        user: { connect: { id: userId } },
       },
     });
 
-    return NextResponse.json({
-      data: joinChallenge,
-      message: "Challenge joined",
-    });
+    return NextResponse.json(
+      {
+        data: joinChallenge,
+        message: "Challenge joined",
+      },
+      { status: 201 }
+    );
   } catch (error) {
     console.log(error);
     return NextResponse.json(

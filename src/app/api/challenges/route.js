@@ -6,7 +6,11 @@ export async function GET(request) {
   let challenges = null;
 
   try {
-    challenges = await prisma.challenge.findMany();
+    challenges = await prisma.challenge.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
     return NextResponse.json({
       data: challenges,
       message: "All challenge fetched successfully",

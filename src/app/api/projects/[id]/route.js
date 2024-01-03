@@ -61,7 +61,7 @@ export async function PUT(req, { params }) {
   const description = formData.get("description");
   const featuredImage = formData.get("featuredImage");
   const category = formData.get("category");
-  const type = formData.get("type");
+  const type = "project";
   const link = formData.get("link");
   const repository = formData.get("repository");
   const tech = formData.get("tech");
@@ -87,7 +87,7 @@ export async function PUT(req, { params }) {
         link,
         repository,
         tech: string.lowerCaseString(tech),
-        userId,
+        user: { connect: { id: userId } },
       },
     });
 
@@ -106,7 +106,7 @@ export async function PUT(req, { params }) {
         message: "Project updated successfully",
         data: updateProject,
       },
-      { status: 200 }
+      { status: 201 }
     );
   } catch (error) {
     console.log(error);

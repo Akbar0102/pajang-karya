@@ -152,7 +152,8 @@ export async function POST(request) {
   const description = formData.get("description");
   const featuredImage = formData.get("featuredImage");
   const category = formData.get("category");
-  const type = formData.get("type");
+  // const type = formData.get("type");
+  const type = "project"
   const link = formData.get("link");
   const repository = formData.get("repository");
   const tech = formData.get("tech");
@@ -179,7 +180,7 @@ export async function POST(request) {
         link,
         repository,
         tech: string.lowerCaseString(tech),
-        userId,
+        user: { connect: { id: userId } },
       },
     });
 

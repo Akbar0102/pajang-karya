@@ -8,8 +8,7 @@ export async function GET(request) {
   try {
     if (username) {
       const singleUser = await prisma.user.findUnique({
-        where:
-          { username },
+        where: { username },
         include: {
           project: {
             select: {
@@ -24,6 +23,9 @@ export async function GET(request) {
               createdAt: true,
               slug: true,
             },
+            orderBy: {
+              createdAt: 'desc',
+            },
           },
         },
       });
@@ -37,12 +39,13 @@ export async function GET(request) {
       );
     }
 
-    return NextResponse.json({
-      message: "No user to show",
-      data: null,
-    },
+    return NextResponse.json(
+      {
+        message: "No user to show",
+        data: null,
+      },
       { status: 200 }
-    )
+    );
   } catch (error) {
     console.log(error);
     return NextResponse.json(
