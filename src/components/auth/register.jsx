@@ -4,8 +4,10 @@ import { Button, Input, Select, SelectItem, Textarea } from "@nextui-org/react";
 import toast from "react-hot-toast";
 import Link from "next/link.js";
 import { useState } from 'react';
+import { useRouter } from "next/navigation";
 
 export const Register = () => {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
 
   async function handleRegister(event) {
@@ -15,7 +17,7 @@ export const Register = () => {
     const username = event.target.username.value;
     const email = event.target.email.value;
     const password = event.target.password.value;
-    const role = event.target.role.value;
+    // const role = event.target.role.value;
     const about = event.target.about.value;
 
     setLoading(true);
@@ -28,13 +30,14 @@ export const Register = () => {
         username,
         email,
         password,
-        role,
+        // role,
         about,
       }),
     });
     const data = await res.json();
     toast.success(data.message);
     setLoading(false);
+    router.push("/login")
   }
 
   return (
@@ -56,7 +59,7 @@ export const Register = () => {
           <Input name="username" label="Username" isRequired />
           <Input name="email" label="Email" type="email" isRequired />
           <Input name="password" label="Password" type="password" isRequired />
-          <Select
+          {/* <Select
             name="role"
             label="Select your current experience"
             defaultSelectedKeys={["beginner"]}
@@ -64,7 +67,7 @@ export const Register = () => {
           >
             <SelectItem key="beginner">Beginner</SelectItem>
             <SelectItem key="expert">Expert</SelectItem>
-          </Select>
+          </Select> */}
           <Textarea name="about" label="A little about yourself" isRequired/>
           <Button color="primary" type="submit" className="w-full" isLoading={loading}>
             Register

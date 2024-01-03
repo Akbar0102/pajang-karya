@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import Link from "next/link.js";
 import { useState } from 'react';
+import Cookies from "js-cookie";
 
 export const Login = () => {
   const router = useRouter();
@@ -21,12 +22,14 @@ export const Login = () => {
       method: "POST",
       body: JSON.stringify({ email, password }),
     });
-    const { message, errorMessage } = await res.json();
+    const { message, errorMessage, data } = await res.json();
 
     if (errorMessage) {
       console.log(errorMessage);
       return;
     }
+
+    Cookies.set("user", JSON.stringify(data));
 
     toast.success(message);
 
