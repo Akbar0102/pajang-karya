@@ -29,7 +29,9 @@ export const Header = () => {
           // Tampilkan tombol Logout jika token ada (pengguna sudah login)
           <div className="flex gap-5 items-center">
             <div className="flex items-center">
-              <Avatar name={parsedPayload.username} radius="full" />
+              <Link href="/dashboard">
+                <Avatar name={parsedPayload.firstName} radius="full" />
+              </Link>
             </div>
             <LogoutButton />
           </div>

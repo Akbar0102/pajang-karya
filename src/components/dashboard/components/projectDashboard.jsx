@@ -1,39 +1,28 @@
-'use client'
-import { AllProjects } from "@/components/projects/allProjects";
-import { apiUrl } from "@/config/apiUrl";
-import {ScrollShadow} from "@nextui-org/react";
+"use client";
+
 import React from "react";
+import Link from "next/link";
+import { Button } from "@nextui-org/react";
+import { ProjectTable } from "@/components/projects/projectTable.jsx";
 
-
-async function getData(query) {
-  if (!query) {
-    const res = await fetch(`${apiUrl}/projects`, { cache: 'no-cache' });
-    const data = await res.json();
-    return data;
-  }
-
-  const res = await fetch(`${apiUrl}/projects?q=${query}`, { cache: 'no-cache' });
-  const data = await res.json();
-  return data;
-}
-
-export default async function ProjectDashboard({ searchParams }) {
-  const { data } = await getData(searchParams);
+export const ProjectDashboard = ({ projectsData }) => {
   return (
     <main>
-       <ScrollShadow>
-      <section className="flex flex-col gap-2">
-        <h1 className="text-xl font-semibold ">Projects</h1>
-        <p>This is overview to all of your projects.</p>
+      <section className="flex justify-between items-end">
+        <div className="flex flex-col gap-2">
+          <h1 className="text-xl font-semibold ">Projects</h1>
+          <p>This is overview to all of your projects.</p>
+        </div>
+        <Link href="/dashboard/project/add">
+          <Button shadow color="primary">
+            Add Project
+          </Button>
+        </Link>
       </section>
 
-        <div className="mt-12">
-          <AllProjects projectsData={data}/>
-        </div>
-      
-    </ScrollShadow>
-      
+      <div className="mt-12">
+        <ProjectTable projectsData={projectsData} />
+      </div>
     </main>
-    
-  )
-}
+  );
+};
