@@ -29,7 +29,7 @@ export const Challenge = ({ challengesData }) => {
           challengesData.length > 0 &&
           challengesData.map(({ id, name, description, featuredImage }) => {
             return (
-              <div>
+              <div key={id}>
                 <Card
                   isFooterBlurred
                   className="w-full h-[450px] col-span-12 sm:col-span-5 flex flex-col justify-between"

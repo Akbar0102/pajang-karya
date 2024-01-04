@@ -12,10 +12,24 @@ import {
 import { imageUrl } from "@/config/apiUrl";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import { toast } from "react-hot-toast";
 
 export const UpdateProject = ({ projectData }) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [rule, setRule] = useState(false);
+
+  const ruleImage = (event) => {
+    const selectedFile = event.target.files[0];
+
+    if (selectedFile && !selectedFile.type.startsWith("image/")) {
+      setRule(true)
+      event.preventDefault();
+      toast.error("Please select a valid image file");
+    }else{
+      setRule(false)
+    }
+  };
 
   async function handleUpdateProject(event) {
     event.preventDefault();
@@ -48,11 +62,11 @@ export const UpdateProject = ({ projectData }) => {
       body: formData,
     });
 
+    setLoading(false);
     if (res.status === 201) {
       router.push("/dashboard/project");
     }
 
-    setLoading(false);
   }
 
   return (
@@ -70,27 +84,28 @@ export const UpdateProject = ({ projectData }) => {
       />
       <form onSubmit={handleUpdateProject}>
         <section className="space-y-4">
-          <Input name="name" label="Name" defaultValue={projectData.name} />
+          <Input name="name" label="Name" defaultValue={projectData.name} isRequired/>
           <Textarea
             name="description"
             label="Description"
             defaultValue={projectData.description}
           />
-          <Input name="featuredImage" type="file" />
-          <Select name="category" defaultSelectedKeys={[projectData.category]}>
+          <Input name="featuredImage" type="file" onChange={ruleImage}/>
+          <Select name="category" defaultSelectedKeys={[projectData.category]} isRequired>
             <SelectItem key="website">Website</SelectItem>
             <SelectItem key="mobile">Mobile</SelectItem>
             <SelectItem key="figma">Figma</SelectItem>
             <SelectItem key="mockups">Mockups</SelectItem>
           </Select>
-          <Input name="link" label="Link" defaultValue={projectData.link} />
+          <Input name="link" label="Link" defaultValue={projectData.link} isRequired/>
           <Input
             name="repository"
             label="Repository"
             defaultValue={projectData.repository}
+            isRequired
           />
-          <Input name="tech" label="Tech" defaultValue={projectData.tech} />
-          <Button type="submit" isLoading={loading} color="primary">
+          <Input name="tech" label="Tech" defaultValue={projectData.tech} isRequired/>
+          <Button type="submit" isLoading={loading} color="primary" isDisabled={rule}>
             Update Project
           </Button>
         </section>

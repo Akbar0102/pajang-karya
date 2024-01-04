@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { imageUrl } from "@/config/apiUrl";
@@ -11,10 +11,30 @@ import {
   Button,
   User,
 } from "@nextui-org/react";
-import { Activity, Presentation, Swords, FileCode } from "lucide-react";
+import {
+  Activity,
+  Presentation,
+  Swords,
+  FileCode,
+  MenuIcon,
+  SmileIcon,
+} from "lucide-react";
 import Cookies from "js-cookie";
 
 export const DashTemplate = ({ children }) => {
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+  const dropdownRef = useRef(null);
+
+  const toggleDropdown = () => {
+    setIsDropdownVisible(!isDropdownVisible);
+  };
+
+  const handleClickOutside = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setIsDropdownVisible(false);
+    }
+  };
+
   const handleLogout = () => {
     // Delete the 'token' cookie
     Cookies.remove("token");
@@ -23,6 +43,20 @@ export const DashTemplate = ({ children }) => {
     // Redirect to the login page or other suitable page
     window.location.href = "/login";
   };
+
+  useEffect(() => {
+    const handleDocumentClick = (event) => {
+      handleClickOutside(event);
+    };
+
+    if (isDropdownVisible) {
+      document.addEventListener("click", handleDocumentClick);
+    }
+
+    return () => {
+      document.removeEventListener("click", handleDocumentClick);
+    };
+  }, [isDropdownVisible]);
 
   return (
     <main className="flex">
@@ -66,8 +100,34 @@ export const DashTemplate = ({ children }) => {
             </Link>
           </div>
         </div>
-        <div className="menu" onClick={handleLogout}>
-          Logout
+        <div className="flex justify-between items-center ">
+          <div className="flex items-center gap-2">
+            <SmileIcon color="#3258E8" />
+          </div>
+          <div className="relative">
+            {isDropdownVisible && (
+              <div className="w-[190px] shadow-xl bg-background-900/20 rounded-lg absolute bottom-12 right-0">
+                <a href="/dashboard/profile/edit">
+                  <button className="border-background-400 disabled:opacity-40 disabled:cursor-wait w-full shadow-black/20 font-medium tracking-tight rounded-lg transition duration-300 ease-in-out bg-transparent shadow-none border-0  hover:bg-indigo-500 hover:text-white flex gap-3 items-center justify-start py-2 px-4">
+                    Edit Profile
+                  </button>
+                </a>
+                <button
+                  className="border-background-400 disabled:opacity-40 disabled:cursor-wait w-full shadow-black/20 font-medium tracking-tight rounded-lg transition duration-300 ease-in-out bg-transparent shadow-none border-0 hover:bg-indigo-500 hover:text-white flex gap-3 items-center justify-start py-2 px-4"
+                  onClick={handleLogout}
+                >
+                  Log out
+                </button>
+              </div>
+            )}
+            <button
+              className="border-1.5 border-background-400 disabled:opacity-40 disabled:cursor-wait bg-transparent shadow-md shadow-black/20 font-medium tracking-tight rounded-lg transition duration-300 ease-in-out bg-gradient-to-b from-background-950 to-background-900/10 hover:border-background-200 hover:text-background-200 active:opacity-80 text-zinc-400 w-fit p-2"
+              onClick={toggleDropdown}
+              ref={dropdownRef}
+            >
+              <MenuIcon size={15} />
+            </button>
+          </div>
         </div>
         {/* <div>
           <Popover showArrow placement="bottom">

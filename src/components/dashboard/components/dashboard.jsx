@@ -19,7 +19,7 @@ export const Dashboard = ({ countProject, countChallenge }) => {
         </Card>
         <Card shadow="sm">
           <CardBody className="p-8 space-y-4">
-            <h6>Challenge Done</h6>
+            <h6>Challenge Joined</h6>
             <h1>{countChallenge}</h1>
           </CardBody>
         </Card>

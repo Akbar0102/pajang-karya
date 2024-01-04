@@ -4,10 +4,24 @@ import bcrypt from "bcrypt";
 import prisma from "@/utils/prisma";
 
 export async function POST(req) {
-  const { firstName, lastName, username, email, password, about } = await req.json();
-  const role = "user"
+  const { firstName, lastName, username, email, password, about } =
+    await req.json();
+  const role = "user";
 
   try {
+    const existingUserWithNewEmail = await prisma.user.findFirst({
+      where: {
+        email,
+      },
+    });
+
+    if (existingUserWithNewEmail) {
+      return NextResponse.json(
+        { errorMessage: "Email is already in use by another user" },
+        { status: 400 }
+      );
+    }
+
     // Create hashed password
     const hashedPassword = await bcrypt.hash(password, 10);
     // Create user to database
@@ -19,7 +33,7 @@ export async function POST(req) {
         email,
         password: hashedPassword,
         role,
-        about
+        about,
       },
     });
 

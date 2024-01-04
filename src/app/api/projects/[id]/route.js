@@ -73,26 +73,27 @@ export async function PUT(req, { params }) {
   const userId = decoded.id;
 
   try {
-    const updateProject = await prisma.project.update({
-      where: {
-        id: id,
-      },
-      data: {
-        name,
-        slug: slugify(name, { lower: true, replacement: "-" }),
-        description,
-        featuredImage: featuredImage ? featuredImage.name : undefined,
-        category,
-        type,
-        link,
-        repository,
-        tech: string.lowerCaseString(tech),
-        user: { connect: { id: userId } },
-      },
-    });
+    const dataToUpdate = {
+      name,
+      slug: slugify(name, { lower: true, replacement: "-" }),
+      description,
+      category,
+      type,
+      link,
+      repository,
+      tech: string.lowerCaseString(tech),
+      user: { connect: { id: userId } },
+    };
 
-    // Send Image ke AWS S3 jika featuredImage diubah
-    if (featuredImage) {
+    if (
+      featuredImage != "undefined" &&
+      featuredImage != "null" &&
+      featuredImage != null &&
+      featuredImage != undefined
+    ) {
+      dataToUpdate.featuredImage = featuredImage.name;
+
+      // Send Image ke AWS S3
       await uploadFile({
         Body: featuredImage,
         Key: featuredImage.name,
@@ -100,6 +101,13 @@ export async function PUT(req, { params }) {
         Dir: `projects/${id}`,
       });
     }
+
+    const updateProject = await prisma.project.update({
+      where: {
+        id: id,
+      },
+      data: dataToUpdate,
+    });
 
     return NextResponse.json(
       {
@@ -129,7 +137,10 @@ export async function DELETE(req, { params }) {
     });
 
     if (!projectDetails) {
-      return NextResponse.json({ errorMessage: 'Project not found' }, { status: 404 });
+      return NextResponse.json(
+        { errorMessage: "Project not found" },
+        { status: 404 }
+      );
     }
 
     // Hapus komen yang terkait dengan proyek
@@ -138,7 +149,7 @@ export async function DELETE(req, { params }) {
         projectId: id,
       },
     });
-    
+
     await prisma.review.deleteMany({
       where: {
         projectId: id,

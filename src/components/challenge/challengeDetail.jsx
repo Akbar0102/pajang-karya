@@ -13,16 +13,17 @@ import { imageUrl } from "@/config/apiUrl";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import Link from "next/link.js";
+import toast from "react-hot-toast";
 
-export const ChallengeDetail = ({ challengeData }) => {
+export const ChallengeDetail = ({ challengeData, payload }) => {
   const router = useRouter();
-  const user = Cookies.get("user");
-  const parsedUser = JSON.parse(user);
+  // const user = Cookies.get("user");
+  // const parsedUser = JSON.parse(user);
   const [loading, setLoading] = useState(false);
   const [joined, setJoined] = useState(false);
 
   const isUserJoined = challengeData.userChallenge.some(
-    (user) => user.user.username === parsedUser.username
+    (user) => user.user.username === payload.username
   );
 
   useEffect(() => {
@@ -46,11 +47,18 @@ export const ChallengeDetail = ({ challengeData }) => {
       },
       body: JSON.stringify(requestData),
     });
+    const { message, errorMessage } = await res.json();
 
+    if (errorMessage) {
+      console.log(errorMessage);
+      return;
+    }
+
+    toast.success(message);
     setLoading(false);
 
     if (res.status === 201) {
-      router.push("/dashboard");
+      router.refresh()
     }
   }
 
@@ -103,7 +111,7 @@ export const ChallengeDetail = ({ challengeData }) => {
         </section>
       ) : (
         <p className=" text-xl font-medium pr-4 mb-5">
-          Eager to test your skill? join to submit your solution
+          Eager to test your skill? join to submit your project
         </p>
       )}
     </main>
