@@ -25,15 +25,16 @@ export const Login = () => {
     const { message, errorMessage, data } = await res.json();
 
     if (errorMessage) {
-      console.log(errorMessage);
+      toast.error(errorMessage);
+      setLoading(false);
       return;
     }
 
     Cookies.set("user", JSON.stringify(data));
 
     toast.success(message);
-
     setLoading(false);
+
     router.push("/dashboard")
   }
 

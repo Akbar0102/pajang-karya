@@ -34,10 +34,19 @@ export const Register = () => {
         about,
       }),
     });
-    const data = await res.json();
-    toast.success(data.message);
+    const { message, errorMessage } = await res.json();
+    if (errorMessage) {
+      toast.error(errorMessage);
+      setLoading(false);
+      return;
+    }
+
+    toast.success(message);
     setLoading(false);
-    router.push("/login")
+
+    if (res.status === 201) {
+      router.push("/login")
+    }
   }
 
   return (

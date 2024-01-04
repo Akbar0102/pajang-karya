@@ -37,13 +37,13 @@ export const UserProfileEdit = ({ payload }) => {
     const { message, errorMessage } = await res.json();
 
     if (errorMessage) {
-      console.log(errorMessage);
+      toast.error(errorMessage);
+      setLoading(false);
       return;
     }
 
-    setLoading(false);
-
     toast.success(message);
+    setLoading(false);
 
     if (res.status === 201) {
       router.refresh();
