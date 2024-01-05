@@ -15,6 +15,21 @@ export async function GET(request) {
       where: {
         userId: userId,
       },
+      include: {
+        project: {
+          select: {
+            name: true,
+            user: {
+              select: {
+                id: true,
+                username: true,
+                firstName: true,
+                lastName: true,
+              },
+            },
+          }
+        }
+      }
     });
     return NextResponse.json(
       { data: myReview, message: "Review fetched successfully" },
@@ -32,7 +47,7 @@ export async function GET(request) {
 export async function POST(request) {
   const { projectId, userId } = await request.json();
   const status = "OP";
-  const review = undefined;
+  const review = "";
 
   try {
     const askReview = await prisma.review.create({

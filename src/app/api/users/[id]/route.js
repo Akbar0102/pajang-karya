@@ -34,10 +34,23 @@ export async function GET(req, { params }) {
             },
           },
         },
+        review: {
+          select: {
+            id: true,
+            status: true,
+            project: {
+              select: {
+                id: true,
+                name: true,
+              },
+            },
+          },
+        },
       },
     });
     const numberOfProjects = singleUser.project.length;
     const numberOfChallenges = singleUser.userChallenge.length;
+    const numberOfReviews = singleUser.review.length;
 
     return NextResponse.json(
       {
@@ -46,6 +59,7 @@ export async function GET(req, { params }) {
           ...singleUser,
           countProject: numberOfProjects,
           countChallenge: numberOfChallenges,
+          countReview: numberOfReviews,
         },
       },
       { status: 200 }
