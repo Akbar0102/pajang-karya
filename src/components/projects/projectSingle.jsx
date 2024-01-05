@@ -6,6 +6,10 @@ import { AllComments } from "../comments/allComments"
 import { CreateComment } from "../comments/createComment"
 import { imageUrl } from "@/config/apiUrl"
 import { cookies, headers } from "next/headers";
+import {
+    Github,
+    LinkIcon
+} from "lucide-react";
 
 export const ProjectSingle = ({ data }) => {
     const token = cookies().get("token")?.value;
@@ -24,11 +28,11 @@ export const ProjectSingle = ({ data }) => {
             <Header />
             <main className=" mx-[100px] mt-[173px]">
                 <section>
-                    <h1 className=" text-[52px] text-black-50 font-[800] mb-3 break-all">{name}</h1>
+                    <h1 className=" text-[52px] text-black-50 font-semibold mb-3 break-all">{name}</h1>
                     <div className=" flex gap-1 items-center">
-                        <Avatar name={username} radius="full" color="primary"/>
+                        <Avatar size="sm" name={username} radius="full" color="primary"/>
                         <Link href={`/${username}`}>
-                            <p className=" font-normal text-grey text-[32px] hover:text-violet break-all">{`${firstName} ${lastName}`}</p>
+                            <h4 className=" font-normal text-grey hover:text-violet break-all">{`${firstName} ${lastName}`}</h4>
                         </Link>
                     </div>
                     <Image
@@ -41,46 +45,42 @@ export const ProjectSingle = ({ data }) => {
                 <section className=" mt-32 min-h-96">
                     <div className=" sm:grid sm:grid-cols-3 flex flex-col gap-y-6">
                         <div className=" sm:col-span-2">
-                            <h2 className=" text-black-50 font-semibold text-4xl mb-2">Overview</h2>
-                            <p className=" text-xl font-medium pr-4 text-justify">
+                            <h2 className=" text-black-50 font-semibold mb-2">Overview</h2>
+                            <p className=" text-medium font-medium pr-4 text-justify">
                                 {description}
                             </p>
                         </div>
                         <div className=" flex flex-col gap-y-6">
                             <div>
-                                <h2 className=" text-black-50 font-semibold text-4xl mb-2">Link</h2>
-                                <div className=" flex gap-1 mb-2 ml-2">
-                                    <Image
-                                        src="/icon/link.svg"
-                                    />
-                                    <a href={repository} className=" text-xl font-medium hover:text-violet break-all">
+                                <h2 className=" text-black-50 font-semibold mb-2">Link</h2>
+                                <div className=" flex gap-1 mb-2">
+                                    <Github size={20}/>
+                                    <a href={repository} className=" text-medium font-medium hover:text-violet break-all">
                                         {repository}
                                     </a>
                                 </div>
-                                <div className=" flex gap-1 ml-2">
-                                    <Image
-                                        src="/icon/link.svg"
-                                    />
-                                    <a href={link} className=" text-xl font-medium hover:text-violet break-all">
+                                <div className=" flex gap-1">
+                                    <LinkIcon size={20}/>
+                                    <a href={link} className=" text-medium font-medium hover:text-violet break-all">
                                         {link}
                                     </a>
                                 </div>
                             </div>
                             <div className=" sm:mt-[109px]">
-                                <h2 className=" text-black-50 font-semibold text-4xl mb-2">Tech stack</h2>
-                                <p className=" text-xl font-medium">{tech}</p>
+                                <h2 className=" text-black-50 font-semibold mb-2">Tech stack</h2>
+                                <p className=" text-medium font-medium">{tech}</p>
                             </div>
                         </div>
                     </div>
                 </section>
 
                 <section className=" mt-14">
-                    <h2 className=" text-black-50 font-semibold text-4xl mb-[30px]">Comment</h2>
+                    <h2 className=" text-black-50 font-semibold mb-[30px]">Comment</h2>
                     <AllComments commentsData={comment} currentUser={parsedPayload ? parsedPayload.id : null} />
                 </section>
 
                 {token ? (<CreateComment projectId={id} />) :
-                    (<p className=" text-xl font-medium pr-4 mb-5">
+                    (<p className=" text-medium font-medium pr-4 mb-10">
                         Please login to give comment
                     </p>)}
 
