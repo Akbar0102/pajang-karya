@@ -8,11 +8,19 @@ import {
   TableCell,
   getKeyValue,
   Spinner,
+  Tooltip,
 } from "@nextui-org/react";
 import Link from "next/link.js";
 import Swal from "sweetalert2";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import {
+  EyeIcon,
+  FileEdit,
+  Trash,
+  MessageCircleMoreIcon,
+  StarIcon,
+} from "lucide-react";
 
 const columns = [
   {
@@ -114,7 +122,7 @@ export const ProjectTable = ({ projectsData }) => {
             zIndex: 9999,
           }}
         >
-          <Spinner label="Loading.." color="primary" labelColor="primary"/>
+          <Spinner label="Loading.." color="primary" labelColor="primary" />
         </div>
       )}
 
@@ -131,15 +139,33 @@ export const ProjectTable = ({ projectsData }) => {
                 {(columnKey) => (
                   <TableCell>
                     {columnKey === "action" ? (
-                      <>
+                      <div className="flex gap-3">
+                        <Link href={`/dashboard/project/detail/${item.id}`}>
+                          <Tooltip content="Show" closeDelay={100}>
+                            <EyeIcon size={15} />
+                          </Tooltip>
+                        </Link>
                         <Link href={`/dashboard/project/update/${item.id}`}>
-                          Edit
-                        </Link>{" "}
-                        |{" "}
+                          <Tooltip content="Edit" closeDelay={100}>
+                            <FileEdit size={15} />
+                          </Tooltip>
+                        </Link>
                         <button onClick={() => handleDelete(item.id)}>
-                          Delete
+                          <Tooltip content="Delete" closeDelay={100}>
+                            <Trash size={15} />
+                          </Tooltip>
                         </button>
-                      </>
+                        <Link href={`/dashboard/project/comment/${item.id}`}>
+                          <Tooltip content="Comment" closeDelay={100}>
+                            <MessageCircleMoreIcon size={15} />
+                          </Tooltip>
+                        </Link>
+                        <Link href={`/dashboard/project/review/${item.id}`}>
+                          <Tooltip content="Review" closeDelay={100}>
+                            <StarIcon size={15} />
+                          </Tooltip>
+                        </Link>
+                      </div>
                     ) : (
                       getKeyValue(item, columnKey)
                     )}

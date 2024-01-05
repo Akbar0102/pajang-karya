@@ -71,7 +71,6 @@ export const DashTemplate = ({ children, user }) => {
 
           <div className="flex flex-col justify-start -my-3 px-2 py-2 rounded-md bg-zinc-600/15">
             <p className="text-lg font-semibold">{`${user.firstName} ${user.lastName}`}</p>
-            <p className="text-sm">{`${user.about}`}</p>
           </div>
 
           <div className="flex flex-col gap-4">

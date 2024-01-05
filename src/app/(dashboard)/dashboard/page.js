@@ -18,7 +18,7 @@ export default async function Page() {
   const parsedPayload = JSON.parse(payload);
 
   const { data } = await getData(parsedPayload);
-  const { countProject, countChallenge } = data;
+  const { countProject, countChallenge, countReview } = data;
 
-  return <Dashboard countProject={countProject} countChallenge={countChallenge}/>;
+  return <Dashboard countProject={countProject} countChallenge={countChallenge} countReview={countReview}/>;
 }
