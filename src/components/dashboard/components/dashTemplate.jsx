@@ -21,7 +21,7 @@ import {
 } from "lucide-react";
 import Cookies from "js-cookie";
 
-export const DashTemplate = ({ children }) => {
+export const DashTemplate = ({ children, user }) => {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -60,13 +60,18 @@ export const DashTemplate = ({ children }) => {
 
   return (
     <main className="flex">
-      <aside className=" h-screen sticky top-0 w-[230px] border-r-2 p-8 flex flex-col justify-between">
+      <aside className=" h-screen sticky top-0 w-[300px] border-r-2 p-8 flex flex-col justify-between">
         <div className="flex flex-col gap-12">
           <div className="flex items-center justify-between sm:justify-start gap-2">
             <Image alt="logo" src="/icon/logo.svg" width={23} height={26} />
             <Link href="/" className=" text-violet text-2xl font-semibold">
               Pakarya
             </Link>
+          </div>
+
+          <div className="flex flex-col justify-start -my-3 px-2 py-2 rounded-md bg-zinc-600/15">
+            <p className="text-lg font-semibold">{`${user.firstName} ${user.lastName}`}</p>
+            <p className="text-sm">{`${user.about}`}</p>
           </div>
 
           <div className="flex flex-col gap-4">
@@ -147,7 +152,7 @@ export const DashTemplate = ({ children }) => {
         </div> */}
       </aside>
 
-      <section className=" col-span-3 w-[calc(100vw-230px)] p-8">
+      <section className=" col-span-3 w-[calc(100vw-300px)] p-8">
         <div className="max-w-5xl m-auto">{children}</div>
       </section>
     </main>

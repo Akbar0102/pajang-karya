@@ -27,6 +27,15 @@
   label {
     @apply text-sm font-medium tracking-tight text-secondary-600 block mb-1 ml-1;
   }
+  ul {
+    @apply list-disc text-sm;
+  }
+  ol{
+    @apply list-decimal text-sm;
+  }
+  li{
+    @apply ml-5;
+  }
 }
 
 @layer components {

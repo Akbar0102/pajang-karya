@@ -6,11 +6,42 @@ import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import confetti from "canvas-confetti";
 import { toast } from "react-hot-toast";
+import dynamic from "next/dynamic";
+import "react-quill/dist/quill.snow.css";
+
+const QuillWrapper = dynamic(
+  async () => {
+    const { default: ReactQuill } = await import("react-quill");
+    return (props) => <ReactQuill {...props} />;
+  },
+  {
+    ssr: false,
+  }
+);
+
+const modules = {
+  toolbar: [
+    // [{ header: [1, 2, 3, 4, 5, 6, false] }, { font: [] }],
+    [{ size: ["normal"] }],
+    ["bold", "italic", "underline", "strike", "blockquote"],
+    [
+      { list: "ordered" },
+      { list: "bullet" },
+      // { indent: "-1" },
+      // { indent: "+1" },
+    ],
+  ],
+  clipboard: {
+    // toggle to add extra line breaks when pasting HTML:
+    matchVisual: false,
+  },
+};
 
 export const CreateProject = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [rule, setRule] = useState(false);
+  const [content, setContent] = useState("");
 
   function appreciateConfetti() {
     const myCanvas = document.createElement("canvas");
@@ -59,7 +90,7 @@ export const CreateProject = () => {
     const category = event.target.category.value;
 
     formData.append("name", name);
-    formData.append("description", description);
+    formData.append("description", content);
     formData.append("featuredImage", featuredImage);
     formData.append("category", category);
     formData.append("link", link);
@@ -95,7 +126,13 @@ export const CreateProject = () => {
       <form onSubmit={handleCreateProject}>
         <section className="space-y-4">
           <Input name="name" label="Name" isRequired />
-          <Textarea name="description" label="Description" isRequired />
+          {/* <Textarea name="description" label="Description" isRequired /> */}
+          <QuillWrapper
+            modules={modules}
+            onChange={setContent}
+            theme="snow"
+            placeholder="Compose an epic..."
+          />
           <Input
             name="featuredImage"
             type="file"

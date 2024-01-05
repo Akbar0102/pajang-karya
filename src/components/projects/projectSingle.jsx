@@ -10,6 +10,7 @@ import {
     Github,
     LinkIcon
 } from "lucide-react";
+import parse from 'html-react-parser';
 
 export const ProjectSingle = ({ data }) => {
     const token = cookies().get("token")?.value;
@@ -46,9 +47,9 @@ export const ProjectSingle = ({ data }) => {
                     <div className=" sm:grid sm:grid-cols-3 flex flex-col gap-y-6">
                         <div className=" sm:col-span-2">
                             <h2 className=" text-black-50 font-semibold mb-2">Overview</h2>
-                            <p className=" text-medium font-medium pr-4 text-justify">
-                                {description}
-                            </p>
+                            <div className=" text-medium font-medium pr-4 text-justify" >
+                                {parse(description)}
+                            </div>
                         </div>
                         <div className=" flex flex-col gap-y-6">
                             <div>
