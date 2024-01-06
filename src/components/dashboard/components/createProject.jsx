@@ -82,7 +82,7 @@ export const CreateProject = () => {
     const formData = new FormData();
 
     const name = event.target.name.value;
-    const description = event.target.description.value;
+    // const description = event.target.description.value;
     const link = event.target.link.value;
     const repository = event.target.repository.value;
     const tech = event.target.tech.value;
