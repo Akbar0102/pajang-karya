@@ -13,8 +13,13 @@ async function getReview(id) {
 
 export default async function Page({ params }) {
   const { id } = params;
-  const { obj } = await getReview(id);
-  const modifiedData = {...obj, ...obj.user}
+  const { data, obj } = await getReview(id);
+  let modifiedData = {
+    review: ""
+  }
+  if(data){
+    modifiedData = {...obj, ...obj.user}
+  }
 
   return <ReviewProjectDashboard review={modifiedData}/>;
 }
