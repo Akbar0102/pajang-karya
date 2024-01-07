@@ -19,7 +19,7 @@ export const Header = () => {
         <div className=" flex items-center justify-center sm:justify-start gap-2">
           <Image alt="logo" src="/icon/logo.svg" width={23} height={26} />
           <Link href="/" className=" text-violet text-2xl font-semibold">
-            Pakarya
+            Karyadev
           </Link>
         </div>
       </div>

@@ -3,7 +3,7 @@
 import { Button, Input, Select, SelectItem, Textarea } from "@nextui-org/react";
 import toast from "react-hot-toast";
 import Link from "next/link.js";
-import { useState } from 'react';
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 export const Register = () => {
@@ -45,7 +45,7 @@ export const Register = () => {
     setLoading(false);
 
     if (res.status === 201) {
-      router.push("/login")
+      router.push("/login");
     }
   }
 
@@ -54,7 +54,7 @@ export const Register = () => {
       <div className="space-y-2">
         <h3>Register</h3>
         <p className="w-[425px] text-justify">
-          <span className="font-bold tracking-tight mr-1">Pakarya</span>
+          <span className="font-bold tracking-tight mr-1">Karyadev</span>
           help you to exhibit your learning projects, share your coding triumphs
           and engage with other newly developer.
         </p>
@@ -77,8 +77,13 @@ export const Register = () => {
             <SelectItem key="beginner">Beginner</SelectItem>
             <SelectItem key="expert">Expert</SelectItem>
           </Select> */}
-          <Textarea name="about" label="A little about yourself" isRequired/>
-          <Button color="primary" type="submit" className="w-full" isLoading={loading}>
+          <Textarea name="about" label="A little about yourself" isRequired />
+          <Button
+            color="primary"
+            type="submit"
+            className="w-full"
+            isLoading={loading}
+          >
             Register
           </Button>
         </div>
